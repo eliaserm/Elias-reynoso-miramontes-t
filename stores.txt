@@ -1,0 +1,133 @@
+USE [BdiExamen]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+alter PROCEDURE [dbo].[spAgregar]
+	@Id int,
+	@Nombre varchar(255),
+	@Descripcion varchar(255)
+AS
+BEGIN
+	BEGIN TRY
+		INSERT INTO tblExamen(idExample,Nombre, Descripcion)
+        VALUES (@Id,@Nombre, @Descripcion);
+		DECLARE @ErrorNumber1 INT;
+        DECLARE @ErrorMessage1 NVARCHAR(4000);
+		SET @ErrorNumber1 = 0;
+        SET @ErrorMessage1 = 'Registro insertado satisfactoriamente';
+        
+        SELECT @ErrorNumber1 AS Resultado, @ErrorMessage1 AS Mensaje;
+	END TRY
+	BEGIN CATCH
+        DECLARE @ErrorNumber INT;
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        
+        SET @ErrorNumber = ERROR_NUMBER();
+        SET @ErrorMessage = ERROR_MESSAGE();
+        
+        SELECT @ErrorNumber AS Resultado, @ErrorMessage AS Mensaje;
+    END CATCH
+END
+
+-----------------------------------------------------------------------------------------------------------------
+USE [BdiExamen]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+Alter PROCEDURE [dbo].[spActualizar]
+	@Id int,
+	@Nombre varchar(255),
+	@Descripcion varchar(255)
+AS
+BEGIN
+	BEGIN TRY
+		
+		UPDATE tblExamen
+        SET Nombre = @Nombre,
+            Descripcion = @Descripcion
+			WHERE idExample = @Id;
+		
+        
+        DECLARE @ErrorNumber1 INT;
+        DECLARE @ErrorMessage1 NVARCHAR(4000);
+		SET @ErrorNumber1 = 0;
+        SET @ErrorMessage1 = 'Registro insertado satisfactoriamente';
+        
+        SELECT @ErrorNumber1 AS Resultado, @ErrorMessage1 AS Mensaje;
+	END TRY
+	BEGIN CATCH
+        DECLARE @ErrorNumber INT;
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        
+        SET @ErrorNumber = ERROR_NUMBER();
+        SET @ErrorMessage = ERROR_MESSAGE();
+        
+        SELECT @ErrorNumber AS Resultado, @ErrorMessage AS Mensaje;
+    END CATCH
+END
+
+------------------------------------------------------------------------------------------------------------------
+USE [BdiExamen]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+alter PROCEDURE [dbo].[spEliminar]
+	@Id int
+AS
+BEGIN
+	BEGIN TRY
+		
+		DELETE FROM tblExamen
+        WHERE idExample = @ID;
+		
+        
+        DECLARE @ErrorNumber1 INT;
+        DECLARE @ErrorMessage1 NVARCHAR(4000);
+		SET @ErrorNumber1 = 0;
+        SET @ErrorMessage1 = 'Registro insertado satisfactoriamente';
+        
+        SELECT @ErrorNumber1 AS Resultado, @ErrorMessage1 AS Mensaje;
+	END TRY
+	BEGIN CATCH
+        DECLARE @ErrorNumber INT;
+        DECLARE @ErrorMessage NVARCHAR(4000);
+        
+        SET @ErrorNumber = ERROR_NUMBER();
+        SET @ErrorMessage = ERROR_MESSAGE();
+        
+        SELECT @ErrorNumber AS Resultado, @ErrorMessage AS Mensaje;
+    END CATCH
+END
+------------------------------------------------------------------------------------------------------
+USE [BdiExamen]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+alter PROCEDURE [dbo].[spConsultar]
+	@Nombre varchar(255),
+	@Descripcion varchar(255)
+AS
+BEGIN
+	SELECT *
+        FROM tblExamen
+        WHERE Nombre = @Nombre AND Descripcion = @Descripcion;
+END
+
+--------------------------------------------------------------------------------------------
+

@@ -1,0 +1,7 @@
+CREATE TABLE tblExamen (
+    idExample INT PRIMARY KEY,
+    Nombre VARCHAR(255) NULL,
+    Descripcion VARCHAR(255) NULL
+);
+
+CREATE UNIQUE INDEX UX_BdiExamen_idExample ON tblExamen (idExample);
